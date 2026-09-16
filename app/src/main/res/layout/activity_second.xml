@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -14,5 +13,135 @@
         android:layout_height="wrap_content"
         android:title="@string/article_title"
         android:navigationIcon="@drawable/arrow_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/article2_title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#111111" />
+
+            <TextView
+                android:id="@+id/article_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/article2_meta"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:textColor="#757575" />
+
+            <ImageView
+                android:id="@+id/article_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/article2_title"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/article2_domenicali" />
+
+            <TextView
+                android:id="@+id/article_lead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_lead"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#0A66C2"
+                android:gravity="center_horizontal"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/article_body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_body1"
+                android:textSize="16sp"
+                android:lineSpacingExtra="3dp" />
+
+            <TextView
+                android:id="@+id/article_body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_body2"
+                android:textSize="16sp"
+                android:lineSpacingExtra="3dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/article_body3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_body3"
+                android:textSize="16sp"
+                android:lineSpacingExtra="3dp" />
+
+            <TextView
+                android:id="@+id/article_body4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_body4"
+                android:textSize="16sp"
+                android:lineSpacingExtra="3dp"
+                android:textAlignment="viewEnd"
+                android:textStyle="italic"
+                android:gravity="end" />
+
+            <TextView
+                android:id="@+id/article_body5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/article2_body5"
+                android:textSize="16sp"
+                android:lineSpacingExtra="3dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <Switch
+                    android:id="@+id/read_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/read_switch"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
