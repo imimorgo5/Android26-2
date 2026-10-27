@@ -6,33 +6,50 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import ru.urfu.droidpractice1.content.MainActivityScreen
-import ru.urfu.droidpractice1.content.MainActivityScreenState
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: ArticleViewModel by viewModels()
+    private var rating by mutableStateOf(0)
+    private var secondRead by mutableStateOf(false)
 
     private val openSecondArticle =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val read = result.data?.getBooleanExtra(SecondActivity.EXTRA_READ, false) ?: false
-            viewModel.setSecondRead(read)
-            Log.d(TAG, "onActivityResult: second article read = $read")
+            val data = result.data
+            if (result.resultCode == RESULT_OK && data?.hasExtra(SecondActivity.EXTRA_READ) == true) {
+                secondRead = data.getBooleanExtra(SecondActivity.EXTRA_READ, false)
+                Log.d(TAG, "onActivityResult: second article read = $secondRead")
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
+        rating = savedInstanceState?.getInt(STATE_RATING) ?: 0
+        secondRead = savedInstanceState?.getBoolean(STATE_SECOND_READ) ?: false
         setContent {
-            val state = MainActivityScreenState(viewModel)
             MainActivityScreen(
-                state = state,
+                rating = rating,
+                isRead = secondRead,
+                onLike = { rating++ },
+                onDislike = { rating-- },
                 onOpenSecond = {
-                    openSecondArticle.launch(Intent(this, SecondActivity::class.java))
+                    openSecondArticle.launch(
+                        Intent(this, SecondActivity::class.java)
+                            .putExtra(SecondActivity.EXTRA_READ, secondRead)
+                    )
                 }
             )
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(STATE_RATING, rating)
+        outState.putBoolean(STATE_SECOND_READ, secondRead)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onStart() {
@@ -67,5 +84,7 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
+        private const val STATE_RATING = "state_rating"
+        private const val STATE_SECOND_READ = "state_second_read"
     }
 }

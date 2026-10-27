@@ -1,6 +1,5 @@
 package ru.urfu.droidpractice1
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +12,6 @@ class SecondActivity : ComponentActivity() {
 
     private lateinit var binding: ActivitySecondBinding
 
-    private val prefs by lazy {
-        getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
@@ -26,7 +21,7 @@ class SecondActivity : ComponentActivity() {
         binding.articleImage.load(R.drawable.article2_domenicali)
 
         binding.readSwitch.isChecked = savedInstanceState?.getBoolean(STATE_READ, false)
-            ?: prefs.getBoolean(KEY_READ, false)
+            ?: intent.getBooleanExtra(EXTRA_READ, false)
 
         binding.readSwitch.setOnCheckedChangeListener { _, isChecked ->
             Log.d(TAG, "read switch -> $isChecked")
@@ -44,7 +39,6 @@ class SecondActivity : ComponentActivity() {
     }
 
     private fun finishWithResult(isRead: Boolean) {
-        prefs.edit().putBoolean(KEY_READ, isRead).apply()
         setResult(
             RESULT_OK,
             Intent().putExtra(EXTRA_READ, isRead)
@@ -91,7 +85,5 @@ class SecondActivity : ComponentActivity() {
         private const val TAG = "SecondActivity"
         const val EXTRA_READ = "extra_read"
         private const val STATE_READ = "state_read"
-        const val PREFS_NAME = "article_state"
-        const val KEY_READ = "second_read"
     }
 }

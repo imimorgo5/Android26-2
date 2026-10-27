@@ -33,7 +33,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:lineSpacingExtra="2dp"
-                android:textColor="#111111" />
+                android:textColor="@color/article_title" />
 
             <TextView
                 android:id="@+id/article_meta"
@@ -43,7 +43,7 @@
                 android:text="@string/article2_meta"
                 android:textSize="13sp"
                 android:textStyle="italic"
-                android:textColor="#757575" />
+                android:textColor="@color/article_meta" />
 
             <ImageView
                 android:id="@+id/article_image"
@@ -62,7 +62,7 @@
                 android:text="@string/article2_lead"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#0A66C2"
+                android:textColor="@color/article_lead"
                 android:gravity="center_horizontal"
                 android:textAlignment="center" />
 

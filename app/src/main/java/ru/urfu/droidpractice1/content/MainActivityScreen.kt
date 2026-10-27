@@ -30,8 +30,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -48,12 +46,13 @@ import ru.urfu.droidpractice1.R
 
 @Composable
 fun MainActivityScreen(
-    state: MainActivityScreenState,
+    rating: Int,
+    isRead: Boolean,
+    onLike: () -> Unit,
+    onDislike: () -> Unit,
     onOpenSecond: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val rating by state.ratingFlow.collectAsState()
-    val isRead by state.secondReadFlow.collectAsState()
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
@@ -158,8 +157,8 @@ fun MainActivityScreen(
 
             RatingBar(
                 rating = rating,
-                onLike = state::like,
-                onDislike = state::dislike
+                onLike = onLike,
+                onDislike = onDislike
             )
             Spacer(modifier = Modifier.height(16.dp))
 
